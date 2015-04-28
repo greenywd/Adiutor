@@ -1,0 +1,10 @@
+{
+    entry = {
+	bundle = ClassicSiri;
+	cell = PSLinkCell;
+	detail = ClassicSiriListController;
+	icon = ClassicSiri.png;
+	isController = 1;
+	label = ClassicSiri;
+    };
+}

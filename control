@@ -1,0 +1,9 @@
+Package: com.greeny.classicsiri
+Name: ClassicSiri
+Depends: mobilesubstrate
+Version: 0.0.1
+Architecture: iphoneos-arm
+Description: An awesome MobileSubstrate tweak!
+Maintainer: GreenyDev <greenydev@greenmail.net.au>
+Author: GreenyDev <greenydev@greenmail.net.au>
+Section: Tweaks
