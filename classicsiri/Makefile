@@ -4,9 +4,9 @@ ARCHS = armv7 arm64
 include theos/makefiles/common.mk
 
 BUNDLE_NAME = ClassicSiri
-ClassicSiri_FILES = ClassicSiri.mm
+ClassicSiri_FILES = $(wildcard *.mm)
 ClassicSiri_INSTALL_PATH = /Library/PreferenceBundles
-ClassicSiri_FRAMEWORKS = UIKit Twitter
+ClassicSiri_FRAMEWORKS = UIKit Social
 ClassicSiri_PRIVATE_FRAMEWORKS = Preferences
 
 include $(THEOS_MAKE_PATH)/bundle.mk

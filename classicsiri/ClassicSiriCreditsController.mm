@@ -1,15 +1,13 @@
-#define kTintColor [UIColor colorWithRed:86/255 green:86/255 blue:92/255 alpha:1.0]
-#import <Preferences/Preferences.h>
-#import <Twitter/TWTweetComposeViewController.h>
+#import "PrefHeaders.h"
 
-@interface ClassicSiriListController: PSListController {
+@interface ClassicSiriCreditsController: PSListController {
 }
 @end
 
-@implementation ClassicSiriListController
+@implementation ClassicSiriCreditsController
 - (id)specifiers {
 	if(_specifiers == nil) {
-		_specifiers = [[self loadSpecifiersFromPlistName:@"ClassicSiri" target:self] retain];
+		_specifiers = [[self loadSpecifiersFromPlistName:@"ClassicSiriCredits" target:self] retain];
 	}
 	return _specifiers;
 }
@@ -36,10 +34,9 @@
 }
 
 - (void)tweetSP:(id)sender {
-    TWTweetComposeViewController *tweetController = [[TWTweetComposeViewController alloc] init];
-    [tweetController setInitialText:@"placeholder"];
-    [self.navigationController presentViewController:tweetController animated:YES completion:nil];
-    [tweetController release];
+	SLComposeViewController *shareVC = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+	[shareVC setInitialText:@"hi @NoelielDEV"];
+	[self presentViewController:shareVC animated:1 completion:nil];
 }
 
 - (id)tableView:(id)arg1 cellForRowAtIndexPath:(id)arg2 {
@@ -48,5 +45,3 @@
 return cell;
 }
 @end
-
-// vim:ft=objc
