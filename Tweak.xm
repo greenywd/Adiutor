@@ -25,21 +25,33 @@ static void loadPreferences() {
 -(void)siriDidActivateFromSource:(long long)arg1 {
     %orig;
     if(!pirated && enabled && isOverlayEnabled){
+		
         [[self view] setFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height * .6, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * .4 )];
-        
-        UIButton *fullScreen = [UIButton buttonWithType: UIButtonTypeSystem];
-        [fullScreen setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * .5, [UIScreen mainScreen].bounds.size.height *.2, 100, 100)];
-        //[fullScreen setUserInteraction:YES];
-        [fullScreen setTitle:@"fullScreen" forState:UIControlStateNormal];
+
+        UIButton *fullScreen = [UIButton buttonWithType: UIButtonTypeContactAdd];
+        //[fullScreen setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * .8, [UIScreen mainScreen].bounds.size.height * .03, 22, 22)];
         [fullScreen addTarget:self action:@selector(presentFullScreen) forControlEvents:UIControlEventTouchUpInside];
         [[self view] addSubview:fullScreen];
     }
 }
 %new(v@:)
 - (void)presentFullScreen{
-	[[self view] setFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height * .1, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * .9)];
+	[[self view] setFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height * .001, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * .999)];
 }
 %end
+
+/*
+%hook UIWindow
+-(void)layoutSubviews {
+	%orig;
+	if (CGRectEqualToRect(self.frame, [[UIScreen mainScreen] bounds])) {
+		CGRect newFrame = [[UIScreen mainScreen] bounds];
+		newFrame.size.height = newFrame.size.height * .6;
+		self.frame = newFrame;
+	}
+}
+%end
+*/
 
 %hook SpringBoard
 - (void)applicationDidFinishLaunching:(int)arg1{

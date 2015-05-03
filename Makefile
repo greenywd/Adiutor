@@ -6,7 +6,8 @@ include theos/makefiles/common.mk
 
 TWEAK_NAME = ClassicSiri
 ClassicSiri_FILES = Tweak.xm
-ClassicSiri_FRAMEWORKS = UIKit
+ClassicSiri_FRAMEWORKS = UIKit Foundation
+ClassicSiri_PRIVATE_FRAMEWORKS = CoreGraphics
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 
