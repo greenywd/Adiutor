@@ -1,5 +1,5 @@
 ARCHS = armv7 arm64
-#TARGET = iphone:clang:latest:latest
+TARGET = iphone:clang:latest:latest
 THEOS_BUILD_DIR = Packages
 
 include theos/makefiles/common.mk

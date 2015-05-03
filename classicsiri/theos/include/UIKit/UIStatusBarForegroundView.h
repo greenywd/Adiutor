@@ -1,0 +1,3 @@
+@interface UIStatusBarForegroundView : UIView
+
+@end

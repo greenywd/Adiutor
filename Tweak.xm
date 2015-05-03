@@ -1,5 +1,5 @@
-#define DPKG_PATH "/var/lib/dpkg/info/com.greeny.classicsiri"
 #import <UIKit/UIKit.h>
+#import "UAObfuscatedString.h"
 #include <dlfcn.h>
 
 bool enabled;
@@ -24,9 +24,20 @@ static void loadPreferences() {
 
 -(void)siriDidActivateFromSource:(long long)arg1 {
     %orig;
-    if(enabled && isOverlayEnabled){
+    if(!pirated && enabled && isOverlayEnabled){
         [[self view] setFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height * .6, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * .4 )];
+        
+        UIButton *fullScreen = [UIButton buttonWithType: UIButtonTypeSystem];
+        [fullScreen setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * .5, [UIScreen mainScreen].bounds.size.height *.2, 100, 100)];
+        //[fullScreen setUserInteraction:YES];
+        [fullScreen setTitle:@"fullScreen" forState:UIControlStateNormal];
+        [fullScreen addTarget:self action:@selector(presentFullScreen) forControlEvents:UIControlEventTouchUpInside];
+        [[self view] addSubview:fullScreen];
     }
+}
+%new(v@:)
+- (void)presentFullScreen{
+	[[self view] setFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height * .1, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * .9)];
 }
 %end
 
@@ -39,6 +50,13 @@ static void loadPreferences() {
     }
 }
 %end
+
+static void something(){
+	NSString *identifier = Obfuscate.forward_slash.v.a.r.forward_slash.l.i.b.forward_slash.d.p.k.g.forward_slash.i.n.f.o.forward_slash.c.o.m.dot.g.r.e.e.n.y.dot.c.l.a.s.s.i.c.s.i.r.i.dot.l.i.s.t;
+	if(![[NSFileManager defaultManager] fileExistsAtPath:identifier]){
+		pirated = YES;
+	}
+}
 %ctor {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                 NULL,
@@ -48,7 +66,5 @@ static void loadPreferences() {
                                 CFNotificationSuspensionBehaviorDeliverImmediately);
     loadPreferences();
     dlopen("/System/Library/PrivateFrameworks/AssistantUI.framework/AssistantUI", RTLD_NOW);
-    if(access(DPKG_PATH, F_OK) == - 1){
-        pirated = 0;
-    }
+    something();
 }
