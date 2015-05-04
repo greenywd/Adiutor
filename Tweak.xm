@@ -33,7 +33,8 @@ static void loadPreferences() {
         UIButton *changeViewBtn = [UIButton buttonWithType: UIButtonTypeContactAdd];
 
         [changeViewBtn setTintColor:[UIColor grayColor]];
-        [changeViewBtn setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * .8, [UIScreen mainScreen].bounds.size.height * .03, 22, 22)];
+        [changeViewBtn setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * .9, [UIScreen mainScreen].bounds.size.height * .34, 22, 22)];
+        changeViewBtn.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [changeViewBtn addTarget:self action:@selector(changeViews) forControlEvents:UIControlEventTouchUpInside];
         
        	[[self view] addSubview:changeViewBtn];
