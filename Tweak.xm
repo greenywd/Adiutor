@@ -9,11 +9,11 @@ bool showStatusBar;
 bool pirated;
 
 static void loadPreferences() {
-    CFPreferencesAppSynchronize(CFSTR("com.greeny.classicsiri"));
+    CFPreferencesAppSynchronize(CFSTR("com.greeny.adiutor"));
 
-    enabled = !CFPreferencesCopyAppValue(CFSTR("enabled"), CFSTR("com.greeny.classicsiri")) ? YES : [(id)CFPreferencesCopyAppValue(CFSTR("enabled"), CFSTR("com.greeny.classicsiri")) boolValue];
-    isOverlayEnabled = !CFPreferencesCopyAppValue(CFSTR("isOverlayEnabled"), CFSTR("com.greeny.classicsiri")) ? YES : [(id)CFPreferencesCopyAppValue(CFSTR("isOverlayEnabled"), CFSTR("com.greeny.classicsiri")) boolValue];
-    showStatusBar = !CFPreferencesCopyAppValue(CFSTR("showStatusBar"), CFSTR("com.greeny.classicsiri")) ? YES : [(id)CFPreferencesCopyAppValue(CFSTR("showStatusBar"), CFSTR("com.greeny.classicsiri")) boolValue];
+    enabled = !CFPreferencesCopyAppValue(CFSTR("enabled"), CFSTR("com.greeny.adiutor")) ? YES : [(id)CFPreferencesCopyAppValue(CFSTR("enabled"), CFSTR("com.greeny.adiutor")) boolValue];
+    isOverlayEnabled = !CFPreferencesCopyAppValue(CFSTR("isOverlayEnabled"), CFSTR("com.greeny.adiutor")) ? YES : [(id)CFPreferencesCopyAppValue(CFSTR("isOverlayEnabled"), CFSTR("com.greeny.adiutor")) boolValue];
+    showStatusBar = !CFPreferencesCopyAppValue(CFSTR("showStatusBar"), CFSTR("com.greeny.adiutor")) ? YES : [(id)CFPreferencesCopyAppValue(CFSTR("showStatusBar"), CFSTR("com.greeny.adiutor")) boolValue];
 }
 
 %hook AFUISiriViewController
@@ -33,7 +33,7 @@ static void loadPreferences() {
         UIButton *changeViewBtn = [UIButton buttonWithType: UIButtonTypeContactAdd];
 
         [changeViewBtn setTintColor:[UIColor grayColor]];
-        [changeViewBtn setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * .9, [UIScreen mainScreen].bounds.size.height * .34, 22, 22)];
+        [changeViewBtn setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * .9, [UIScreen mainScreen].bounds.size.height * .345, 22, 22)];
         changeViewBtn.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [changeViewBtn addTarget:self action:@selector(changeViews) forControlEvents:UIControlEventTouchUpInside];
         
@@ -47,18 +47,19 @@ static void loadPreferences() {
 	
 		[UIView beginAnimations:nil context:nil];
     	[UIView setAnimationDuration:0.5];
-    	[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 
-		[[self view] setFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height * .0001, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * .9999)];
+		[[self view] setFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
 	
 		[UIView commitAnimations];
 
 		isFullScreenView = YES;
 
 	} else {
+
 		[UIView beginAnimations:nil context:nil];
     	[UIView setAnimationDuration:0.5];
-    	[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 
 		[[self view] setFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height * .6, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * .4 )];
 
@@ -102,7 +103,7 @@ static void something(){
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                 NULL,
                                 (CFNotificationCallback)loadPreferences,
-                                CFSTR("com.greeny.classicsiri/prefsChanged"),
+                                CFSTR("com.greeny.adiutor/prefsChanged"),
                                 NULL,
                                 CFNotificationSuspensionBehaviorDeliverImmediately);
     loadPreferences();

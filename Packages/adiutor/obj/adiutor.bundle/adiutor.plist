@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>headerCellClass</key>
+			<string>adiutorHeaderCell</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.greeny.adiutor</string>
+			<key>key</key>
+			<string>enabled</string>
+			<key>label</key>
+			<string>Enabled</string>
+			<key>PostNotification</key>
+			<string>com.greeny.adiutor/prefsChanged</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.greeny.adiutor</string>
+			<key>key</key>
+			<string>showStatusBar</string>
+			<key>label</key>
+			<string>Show StatusBar</string>
+			<key>PostNotification</key>
+			<string>com.greeny.adiutor/prefsChanged</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.greeny.adiutor</string>
+			<key>key</key>
+			<string>isOverlayEnabled</string>
+			<key>label</key>
+			<string>Use Overlay</string>
+			<key>PostNotification</key>
+			<string>com.greeny.adiutor/prefsChanged</string>
+			<key>enabled</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>detail</key>
+			<string>adiutorCreditsController</string>
+			<key>label</key>
+			<string>Credits</string>
+		</dict>
+	</array>
+	<key>title</key>
+	<string>adiutor</string>
+</dict>
+</plist>
