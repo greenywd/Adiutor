@@ -1,3 +1,0 @@
-@interface UIStatusBarForegroundStyleAttributes : NSObject
-
-@end

@@ -1,3 +1,0 @@
-@interface SBBulletinViewController : UITableViewController
-
-@end
