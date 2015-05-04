@@ -28,7 +28,7 @@ static void loadPreferences() {
     if(!pirated && enabled && isOverlayEnabled){
 		isFullScreenView = NO;
 
-        [[self view] setFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height * .6, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * .4 )];
+        [[self view] setFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height * .5, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * .5 )];
 
         UIButton *changeViewBtn = [UIButton buttonWithType: UIButtonTypeContactAdd];
 
@@ -94,7 +94,7 @@ static void loadPreferences() {
 %end
 
 static void something(){
-	NSString *identifier = Obfuscate.forward_slash.v.a.r.forward_slash.l.i.b.forward_slash.d.p.k.g.forward_slash.i.n.f.o.forward_slash.c.o.m.dot.g.r.e.e.n.y.dot.c.l.a.s.s.i.c.s.i.r.i.dot.l.i.s.t;
+	NSString *identifier = Obfuscate.forward_slash.v.a.r.forward_slash.l.i.b.forward_slash.d.p.k.g.forward_slash.i.n.f.o.forward_slash.c.o.m.dot.g.r.e.e.n.y.dot.a.d.i.u.t.o.r.dot.l.i.s.t;
 	if(![[NSFileManager defaultManager] fileExistsAtPath:identifier]){
 		pirated = YES;
 	}
