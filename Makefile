@@ -5,7 +5,7 @@ THEOS_BUILD_DIR = Packages
 include theos/makefiles/common.mk
 
 TWEAK_NAME = ClassicSiri
-ClassicSiri_FILES = Tweak.xm
+ClassicSiri_FILES = Tweak.xm UAObfuscatedString.m
 ClassicSiri_FRAMEWORKS = UIKit Foundation
 ClassicSiri_PRIVATE_FRAMEWORKS = CoreGraphics
 

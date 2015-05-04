@@ -4,6 +4,7 @@
 
 bool enabled;
 bool isOverlayEnabled;
+bool isFullScreenView;
 bool showStatusBar;
 bool pirated;
 
@@ -25,18 +26,45 @@ static void loadPreferences() {
 -(void)siriDidActivateFromSource:(long long)arg1 {
     %orig;
     if(!pirated && enabled && isOverlayEnabled){
-		
+		isFullScreenView = NO;
+
         [[self view] setFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height * .6, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * .4 )];
 
-        UIButton *fullScreen = [UIButton buttonWithType: UIButtonTypeContactAdd];
-        //[fullScreen setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * .8, [UIScreen mainScreen].bounds.size.height * .03, 22, 22)];
-        [fullScreen addTarget:self action:@selector(presentFullScreen) forControlEvents:UIControlEventTouchUpInside];
-        [[self view] addSubview:fullScreen];
+        UIButton *changeViewBtn = [UIButton buttonWithType: UIButtonTypeContactAdd];
+
+        [changeViewBtn setTintColor:[UIColor grayColor]];
+        [changeViewBtn setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * .8, [UIScreen mainScreen].bounds.size.height * .03, 22, 22)];
+        [changeViewBtn addTarget:self action:@selector(changeViews) forControlEvents:UIControlEventTouchUpInside];
+        
+       	[[self view] addSubview:changeViewBtn];
     }
 }
 %new(v@:)
-- (void)presentFullScreen{
-	[[self view] setFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height * .001, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * .999)];
+- (void)changeViews{
+
+	if(!isFullScreenView){
+	
+		[UIView beginAnimations:nil context:nil];
+    	[UIView setAnimationDuration:0.5];
+    	[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+
+		[[self view] setFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height * .0001, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * .9999)];
+	
+		[UIView commitAnimations];
+
+		isFullScreenView = YES;
+
+	} else {
+		[UIView beginAnimations:nil context:nil];
+    	[UIView setAnimationDuration:0.5];
+    	[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+
+		[[self view] setFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height * .6, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * .4 )];
+
+		[UIView commitAnimations];
+		
+		isFullScreenView = NO;
+	}
 }
 %end
 
