@@ -16,6 +16,7 @@ static void loadPreferences() {
     showStatusBar = !CFPreferencesCopyAppValue(CFSTR("showStatusBar"), CFSTR("com.greeny.adiutor")) ? YES : [(id)CFPreferencesCopyAppValue(CFSTR("showStatusBar"), CFSTR("com.greeny.adiutor")) boolValue];
 }
 
+
 %hook AFUISiriViewController
 
 UIButton *changeViewBtn = [UIButton buttonWithType: UIButtonTypeContactAdd];
@@ -31,14 +32,14 @@ UIButton *changeViewBtn = [UIButton buttonWithType: UIButtonTypeContactAdd];
     if(!pirated && enabled && isOverlayEnabled){
 		isFullScreenView = NO;
 
-        [[self view] setFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height * .5, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * .5 )];
+        [[self view] setFrame:CGRectMake(0, [self view].bounds.size.height * .5, [self view].bounds.size.width, [self view].bounds.size.height * .5 )];
 
-        [changeViewBtn setTintColor:[UIColor grayColor]];
-        [changeViewBtn setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * .9, ([self view].bounds.size.height -33)/*([UIScreen mainScreen].bounds.size.height-[UIScreen mainScreen].bounds.size.width)*/, 22, 22)];
-        //changeViewBtn.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        [changeViewBtn addTarget:self action:@selector(changeViews) forControlEvents:UIControlEventTouchUpInside];
+	[changeViewBtn setTintColor:[UIColor grayColor]];
+    [changeViewBtn setFrame:CGRectMake([self view].bounds.size.width * .9, ([self view].bounds.size.height -33)/*([UIScreen mainScreen].bounds.size.height-[UIScreen mainScreen].bounds.size.width)*/, 22, 22)];
+    //changeViewBtn.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [changeViewBtn addTarget:self action:@selector(changeViews) forControlEvents:UIControlEventTouchUpInside];
         
-       	[[self view] addSubview:changeViewBtn];
+    [[self view] addSubview:changeViewBtn];
     }
 }
 %new(v@:)
@@ -55,7 +56,7 @@ UIButton *changeViewBtn = [UIButton buttonWithType: UIButtonTypeContactAdd];
 		[UIView commitAnimations];
 
 		isFullScreenView = YES;
-        [changeViewBtn setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * .9, ([self view].bounds.size.height -33)/*([UIScreen mainScreen].bounds.size.height-[UIScreen mainScreen].bounds.size.width)*/, 22, 22)];
+        [changeViewBtn setFrame:CGRectMake([self view].bounds.size.width * .9, ([self view].bounds.size.height -33)/*([UIScreen mainScreen].bounds.size.height-[UIScreen mainScreen].bounds.size.width)*/, 22, 22)];
 
 
 	} else {
@@ -64,8 +65,9 @@ UIButton *changeViewBtn = [UIButton buttonWithType: UIButtonTypeContactAdd];
     	[UIView setAnimationDuration:0.5];
     	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 
-		[[self view] setFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height * .6, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * .4 )];
-        [changeViewBtn setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * .9, ([self view].bounds.size.height -33)/*([UIScreen mainScreen].bounds.size.height-[UIScreen mainScreen].bounds.size.width)*/, 22, 22)];
+		[[self view] setFrame:CGRectMake(0, [self view].bounds.size.height * .5, [self view].bounds.size.width, [self view].bounds.size.height * .5 )];
+
+        [changeViewBtn setFrame:CGRectMake([self view].bounds.size.width * .9, ([self view].bounds.size.height -33)/*([UIScreen mainScreen].bounds.size.height-[UIScreen mainScreen].bounds.size.width)*/, 22, 22)];
 
 
 		[UIView commitAnimations];
@@ -88,20 +90,10 @@ UIButton *changeViewBtn = [UIButton buttonWithType: UIButtonTypeContactAdd];
 %end
 */
 
-%hook SpringBoard
-- (void)applicationDidFinishLaunching:(int)arg1{
-    %orig;
-    if(pirated){
-        UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"memes" message:@"memes" delegate:nil cancelButtonTitle:@"memes" otherButtonTitles:nil];
-        [view show];
-    }
-}
-%end
-
 static void something(){
 	NSString *identifier = Obfuscate.forward_slash.v.a.r.forward_slash.l.i.b.forward_slash.d.p.k.g.forward_slash.i.n.f.o.forward_slash.c.o.m.dot.g.r.e.e.n.y.dot.a.d.i.u.t.o.r.dot.l.i.s.t;
 	if(![[NSFileManager defaultManager] fileExistsAtPath:identifier]){
-		pirated = YES;
+		pirated = NO;
 	}
 }
 %ctor {

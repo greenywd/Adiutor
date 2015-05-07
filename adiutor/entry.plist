@@ -5,6 +5,6 @@
 	detail = adiutorListController;
 	icon = adiutor.png;
 	isController = 1;
-	label = adiutor;
+	label = Adiutor;
     };
 }
