@@ -17,6 +17,9 @@ static void loadPreferences() {
 }
 
 %hook AFUISiriViewController
+
+UIButton *changeViewBtn = [UIButton buttonWithType: UIButtonTypeContactAdd];
+
 -(void)_addStatusBar {
     if(showStatusBar){
         %orig;
@@ -30,11 +33,9 @@ static void loadPreferences() {
 
         [[self view] setFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height * .5, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * .5 )];
 
-        UIButton *changeViewBtn = [UIButton buttonWithType: UIButtonTypeContactAdd];
-
         [changeViewBtn setTintColor:[UIColor grayColor]];
-        [changeViewBtn setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * .9, [UIScreen mainScreen].bounds.size.height * .345, 22, 22)];
-        changeViewBtn.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [changeViewBtn setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * .9, ([self view].bounds.size.height -33)/*([UIScreen mainScreen].bounds.size.height-[UIScreen mainScreen].bounds.size.width)*/, 22, 22)];
+        //changeViewBtn.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [changeViewBtn addTarget:self action:@selector(changeViews) forControlEvents:UIControlEventTouchUpInside];
         
        	[[self view] addSubview:changeViewBtn];
@@ -54,6 +55,8 @@ static void loadPreferences() {
 		[UIView commitAnimations];
 
 		isFullScreenView = YES;
+        [changeViewBtn setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * .9, ([self view].bounds.size.height -33)/*([UIScreen mainScreen].bounds.size.height-[UIScreen mainScreen].bounds.size.width)*/, 22, 22)];
+
 
 	} else {
 
@@ -62,6 +65,8 @@ static void loadPreferences() {
     	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 
 		[[self view] setFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height * .6, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * .4 )];
+        [changeViewBtn setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * .9, ([self view].bounds.size.height -33)/*([UIScreen mainScreen].bounds.size.height-[UIScreen mainScreen].bounds.size.width)*/, 22, 22)];
+
 
 		[UIView commitAnimations];
 		
