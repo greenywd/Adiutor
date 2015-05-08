@@ -5,21 +5,49 @@
 	<key>items</key>
 	<array>
 		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<true/>
-			<key>defaults</key>
-			<string>com.greeny.adiutor</string>
-			<key>key</key>
-			<string>enabled</string>
-			<key>label</key>
-			<string>Enabled</string>
-			<key>PostNotification</key>
-			<string>com.greeny.adiutor/prefsChanged</string>
-		</dict>
+				<key>cell</key>
+				<string>PSLinkCell</string>
+				<key>cellClass</key>
+				<string>GreenyDev</string>
+				<key>height</key>
+				<integer>100</integer>
+				<key>detail</key>
+				<string>GreenyTwitter</string> 		
+			</dict>
+						<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>footerText</key>
+				<string>With help from:</string>
+				<key>footerAlignment</key>
+				<integer>1</integer>
+			</dict>
+						<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+			</dict>
+			<dict>
+				<key>cell</key>
+				<string>PSLinkCell</string>
+				<key>cellClass</key>
+				<string>ethan</string>
+				<key>height</key>
+				<integer>100</integer>
+				<key>detail</key>
+				<string>ethantwitter</string> 		
+			</dict>
+						<dict>
+				<key>cell</key>
+				<string>PSLinkCell</string>
+				<key>cellClass</key>
+				<string>megachon</string>
+				<key>height</key>
+				<integer>100</integer>
+				<key>detail</key>
+				<string>megachontwitter</string> 		
+			</dict>
 	</array>
 	<key>title</key>
-	<string>adiutor</string>
+	<string>Credits</string>
 </dict>
 </plist>

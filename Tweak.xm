@@ -93,7 +93,7 @@ UIButton *changeViewBtn = [UIButton buttonWithType: UIButtonTypeContactAdd];
 static void something(){
 	NSString *identifier = Obfuscate.forward_slash.v.a.r.forward_slash.l.i.b.forward_slash.d.p.k.g.forward_slash.i.n.f.o.forward_slash.c.o.m.dot.g.r.e.e.n.y.dot.a.d.i.u.t.o.r.dot.l.i.s.t;
 	if(![[NSFileManager defaultManager] fileExistsAtPath:identifier]){
-		pirated = NO;
+		pirated = YES;
 	}
 }
 %ctor {
