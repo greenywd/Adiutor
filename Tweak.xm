@@ -29,7 +29,7 @@ static void loadPreferences() {
 -(void)siriDidActivateFromSource:(long long)arg1 {
     %orig;
 
-    UIButton *changeViewBtn = [UIButton buttonWithType: UIButtonTypeContactAdd];
+    UIButton *changeViewBtn = [[UIButton buttonWithType: UIButtonTypeContactAdd] retain];
 
     if(!pirated && enabled && isOverlayEnabled && !fullScreenFirst){
 		isFullScreenView = NO;
@@ -61,7 +61,7 @@ static void loadPreferences() {
 
 %new(v@:)
 - (void)changeViews{
-    UIButton *changeViewBtn2 = [UIButton buttonWithType: UIButtonTypeContactAdd];
+    UIButton *changeViewBtn2 = [[UIButton buttonWithType: UIButtonTypeContactAdd] retain];
 
 	if(!isFullScreenView){
 	
