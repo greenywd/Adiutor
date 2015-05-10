@@ -7,7 +7,7 @@ BUNDLE_NAME = adiutor
 adiutor_FILES = $(wildcard *.mm)
 adiutor_INSTALL_PATH = /Library/PreferenceBundles
 adiutor_FRAMEWORKS = UIKit Social
-adiutor_PRIVATE_FRAMEWORKS = Preferences
+adiutor_PRIVATE_FRAMEWORKS = Preferences MessageUI
 
 include $(THEOS_MAKE_PATH)/bundle.mk
 

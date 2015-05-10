@@ -8,7 +8,7 @@ void isPirated(){
     }
 }
 
-@interface adiutorListController: PSListController {
+@interface adiutorListController : PSListController {
 }
 @end
 
