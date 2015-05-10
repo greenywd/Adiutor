@@ -20,8 +20,6 @@ static void loadPreferences() {
 
 %hook AFUISiriViewController
 
-UIButton *changeViewBtn = [UIButton buttonWithType: UIButtonTypeContactAdd];
-
 -(void)_addStatusBar {
     if(showStatusBar){
         %orig;
@@ -30,33 +28,40 @@ UIButton *changeViewBtn = [UIButton buttonWithType: UIButtonTypeContactAdd];
 
 -(void)siriDidActivateFromSource:(long long)arg1 {
     %orig;
+
+    UIButton *changeViewBtn = [UIButton buttonWithType: UIButtonTypeContactAdd];
+
     if(!pirated && enabled && isOverlayEnabled && !fullScreenFirst){
 		isFullScreenView = NO;
 
         [[self view] setFrame:CGRectMake(0, [self view].bounds.size.height * .5, [self view].bounds.size.width, [self view].bounds.size.height * .5 )];
 
-	[changeViewBtn setTintColor:[UIColor grayColor]];
-    [changeViewBtn setFrame:CGRectMake([self view].bounds.size.width * .9, ([self view].bounds.size.height -33)/*([UIScreen mainScreen].bounds.size.height-[UIScreen mainScreen].bounds.size.width)*/, 22, 22)];
+	    [changeViewBtn setTintColor:[UIColor grayColor]];
+        [changeViewBtn setFrame:CGRectMake([self view].bounds.size.width * .9, ([self view].bounds.size.height -33), 22, 22)];
 
-    [changeViewBtn addTarget:self action:@selector(changeViews) forControlEvents:UIControlEventTouchDown];
+        [changeViewBtn addTarget:self action:@selector(changeViews) forControlEvents:UIControlEventTouchDown];
         
-    [[self view] addSubview:changeViewBtn];
+        [[self view] addSubview:changeViewBtn];
+
     } else {
 
         isFullScreenView = YES;
 
         [[self view] setFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
 
+        //UIButton *changeViewBtn1 = [UIButton buttonWithType: UIButtonTypeContactAdd];
         [changeViewBtn setTintColor:[UIColor grayColor]];
-    [changeViewBtn setFrame:CGRectMake([self view].bounds.size.width * .9, ([self view].bounds.size.height -33)/*([UIScreen mainScreen].bounds.size.height-[UIScreen mainScreen].bounds.size.width)*/, 22, 22)];
+        [changeViewBtn setFrame:CGRectMake([self view].bounds.size.width * .9, ([self view].bounds.size.height -33), 22, 22)];
 
-    [changeViewBtn addTarget:self action:@selector(changeViews) forControlEvents:UIControlEventTouchDown];
+        [changeViewBtn addTarget:self action:@selector(changeViews) forControlEvents:UIControlEventTouchDown];
         
-    [[self view] addSubview:changeViewBtn];
+        [[self view] addSubview:changeViewBtn];
     }
 }
+
 %new(v@:)
 - (void)changeViews{
+    UIButton *changeViewBtn2 = [UIButton buttonWithType: UIButtonTypeContactAdd];
 
 	if(!isFullScreenView){
 	
@@ -69,8 +74,13 @@ UIButton *changeViewBtn = [UIButton buttonWithType: UIButtonTypeContactAdd];
 		[UIView commitAnimations];
 
 		isFullScreenView = YES;
-        [changeViewBtn setFrame:CGRectMake([self view].bounds.size.width * .9, ([self view].bounds.size.height -33)/*([UIScreen mainScreen].bounds.size.height-[UIScreen mainScreen].bounds.size.width)*/, 22, 22)];
 
+        [changeViewBtn2 setTintColor:[UIColor grayColor]];
+        [changeViewBtn2 setFrame:CGRectMake([self view].bounds.size.width * .9, ([self view].bounds.size.height -33), 22, 22)];
+
+        [changeViewBtn2 addTarget:self action:@selector(changeViews) forControlEvents:UIControlEventTouchDown];
+        
+        [[self view] addSubview:changeViewBtn2];
 
 	} else {
 
@@ -80,13 +90,12 @@ UIButton *changeViewBtn = [UIButton buttonWithType: UIButtonTypeContactAdd];
 
 		[[self view] setFrame:CGRectMake(0, [self view].bounds.size.height * .5, [self view].bounds.size.width, [self view].bounds.size.height * .5 )];
 
-        [changeViewBtn setFrame:CGRectMake([self view].bounds.size.width * .9, ([self view].bounds.size.height -33)/*([UIScreen mainScreen].bounds.size.height-[UIScreen mainScreen].bounds.size.width)*/, 22, 22)];
-
-
 		[UIView commitAnimations];
 		
 		isFullScreenView = NO;
-	}
+	   
+        [changeViewBtn2 setFrame:CGRectMake([self view].bounds.size.width * .9, ([self view].bounds.size.height -33), 22, 22)];
+    }
 }
 %end
 

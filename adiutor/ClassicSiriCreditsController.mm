@@ -35,7 +35,7 @@
 
 - (void)tweetSP:(id)sender {
 	SLComposeViewController *shareVC = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
-	[shareVC setInitialText:@"hi @NoelielDEV"];
+	[shareVC setInitialText:@"I'm using #Adiutor by @GreenyDev to use a minimal Siri!"];
 	[self presentViewController:shareVC animated:1 completion:nil];
 }
 
