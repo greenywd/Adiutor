@@ -9,13 +9,16 @@ bool fullScreenFirst;
 bool showStatusBar;
 bool pirated;
 
+CGFloat heightOfSiri;
+
 static void loadPreferences() {
     CFPreferencesAppSynchronize(CFSTR("com.greeny.adiutor"));
 
     enabled = !CFPreferencesCopyAppValue(CFSTR("enabled"), CFSTR("com.greeny.adiutor")) ? YES : [(id)CFPreferencesCopyAppValue(CFSTR("enabled"), CFSTR("com.greeny.adiutor")) boolValue];
     isOverlayEnabled = !CFPreferencesCopyAppValue(CFSTR("isOverlayEnabled"), CFSTR("com.greeny.adiutor")) ? YES : [(id)CFPreferencesCopyAppValue(CFSTR("isOverlayEnabled"), CFSTR("com.greeny.adiutor")) boolValue];
     showStatusBar = !CFPreferencesCopyAppValue(CFSTR("showStatusBar"), CFSTR("com.greeny.adiutor")) ? YES : [(id)CFPreferencesCopyAppValue(CFSTR("showStatusBar"), CFSTR("com.greeny.adiutor")) boolValue];
-    fullScreenFirst = !CFPreferencesCopyAppValue(CFSTR("fullScreenFirst"), CFSTR("com.greeny.adiutor")) ? YES : [(id)CFPreferencesCopyAppValue(CFSTR("fullScreenFirst"), CFSTR("com.greeny.adiutor")) boolValue];
+    fullScreenFirst = !CFPreferencesCopyAppValue(CFSTR("fullScreenFirst"), CFSTR("com.greeny.adiutor")) ? NO : [(id)CFPreferencesCopyAppValue(CFSTR("fullScreenFirst"), CFSTR("com.greeny.adiutor")) boolValue];
+    heightOfSiri = !CFPreferencesCopyAppValue(CFSTR("heightOfSiri"), CFSTR("com.greeny.adiutor")) ? .5 : [(id)CFPreferencesCopyAppValue(CFSTR("heightOfSiri"), CFSTR("com.greeny.adiutor")) floatValue];
 }
 
 %hook AFUISiriViewController
@@ -34,7 +37,7 @@ static void loadPreferences() {
     if(!pirated && enabled && isOverlayEnabled && !fullScreenFirst){
 		isFullScreenView = NO;
 
-        [[self view] setFrame:CGRectMake(0, [self view].bounds.size.height * .5, [self view].bounds.size.width, [self view].bounds.size.height * .5 )];
+        [[self view] setFrame:CGRectMake(0, [self view].bounds.size.height * heightOfSiri, [self view].bounds.size.width, [self view].bounds.size.height * (1 - heightOfSiri))];
 
 	    [changeViewBtn setTintColor:[UIColor grayColor]];
         [changeViewBtn setFrame:CGRectMake([self view].bounds.size.width * .9, ([self view].bounds.size.height -33), 22, 22)];
@@ -88,7 +91,7 @@ static void loadPreferences() {
     	[UIView setAnimationDuration:0.5];
     	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 
-		[[self view] setFrame:CGRectMake(0, [self view].bounds.size.height * .5, [self view].bounds.size.width, [self view].bounds.size.height * .5 )];
+		[[self view] setFrame:CGRectMake(0, [self view].bounds.size.height * heightOfSiri, [self view].bounds.size.width, [self view].bounds.size.height * (1 - heightOfSiri))];
 
 		[UIView commitAnimations];
 		
