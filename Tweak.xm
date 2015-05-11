@@ -39,7 +39,7 @@ static void loadPreferences() {
 
         [[self view] setFrame:CGRectMake(0, [self view].bounds.size.height * heightOfSiri, [self view].bounds.size.width, [self view].bounds.size.height * (1 - heightOfSiri))];
 
-	    [changeViewBtn setTintColor:[UIColor grayColor]];
+	    [changeViewBtn setTintColor:[UIColor whiteColor]];
         [changeViewBtn setFrame:CGRectMake([self view].bounds.size.width * .9, ([self view].bounds.size.height -33), 22, 22)];
 
         [changeViewBtn addTarget:self action:@selector(changeViews) forControlEvents:UIControlEventTouchDown];
@@ -47,18 +47,19 @@ static void loadPreferences() {
         [[self view] addSubview:changeViewBtn];
 
     } else {
+        if(!pirated && enabled && fullScreenFirst){
+            isFullScreenView = YES;
 
-        isFullScreenView = YES;
+            [[self view] setFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
 
-        [[self view] setFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+            //UIButton *changeViewBtn1 = [UIButton buttonWithType: UIButtonTypeContactAdd];
+            [changeViewBtn setTintColor:[UIColor whiteColor]];
+            [changeViewBtn setFrame:CGRectMake([self view].bounds.size.width * .9, ([self view].bounds.size.height -33), 22, 22)];
 
-        //UIButton *changeViewBtn1 = [UIButton buttonWithType: UIButtonTypeContactAdd];
-        [changeViewBtn setTintColor:[UIColor grayColor]];
-        [changeViewBtn setFrame:CGRectMake([self view].bounds.size.width * .9, ([self view].bounds.size.height -33), 22, 22)];
-
-        [changeViewBtn addTarget:self action:@selector(changeViews) forControlEvents:UIControlEventTouchDown];
+            [changeViewBtn addTarget:self action:@selector(changeViews) forControlEvents:UIControlEventTouchDown];
         
-        [[self view] addSubview:changeViewBtn];
+            [[self view] addSubview:changeViewBtn];
+        }
     }
 }
 
@@ -78,7 +79,7 @@ static void loadPreferences() {
 
 		isFullScreenView = YES;
 
-        [changeViewBtn2 setTintColor:[UIColor grayColor]];
+        [changeViewBtn2 setTintColor:[UIColor whiteColor]];
         [changeViewBtn2 setFrame:CGRectMake([self view].bounds.size.width * .9, ([self view].bounds.size.height -33), 22, 22)];
 
         [changeViewBtn2 addTarget:self action:@selector(changeViews) forControlEvents:UIControlEventTouchDown];
