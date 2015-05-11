@@ -52,48 +52,38 @@
 			<key>PostNotification</key>
 			<string>com.greeny.adiutor/prefsChanged</string>
 		</dict>
+		 <dict>
+            <key>cell</key>
+            <string>PSGroupCell</string>
+            <key>footerText</key>
+            <string>Height</string>
+            <key>footerAlignment</key>
+            <integer>1</integer>
+        </dict>
 		<dict>
-			<key>cell</key>
-			<string>PSEditTextCell</string>
-			<key>placeholder</key>
-			<string>0.5 = half of screen</string>
-			<key>defaults</key>
-			<string>com.greeny.adiutor</string>
+			<key>showValue</key>
+			<true/>
+			<key>max</key>
+			<integer>1</integer>
+			<key>min</key>
+			<integer>0</integer>
 			<key>PostNotification</key>
 			<string>com.greeny.adiutor/prefsChanged</string>
-			<key>isDecimalPad</key>
-			<true/>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<real>0.5</real>
+			<key>defaults</key>
+			<string>com.greeny.adiutor</string>
 			<key>key</key>
 			<string>heightOfSiri</string>
-			<key>label</key>
-			<string>Height</string>
 		</dict>
-					<dict>
-				<key>cell</key>
-				<string>PSGroupCell</string>
-				<key>footerText</key>
-				<string>Coming soon I promise!</string>
-			</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>com.greeny.adiutor</string>
-			<key>key</key>
-			<string>isOverlayEnabled</string>
-			<key>label</key>
-			<string>Push screen up</string>
-			<key>PostNotification</key>
-			<string>com.greeny.adiutor/prefsChanged</string>
-			<key>enabled</key>
-			<false/>
-		</dict>
-					<dict>
-				<key>cell</key>
-				<string>PSGroupCell</string>
-			</dict>
+       <dict>
+            <key>cell</key>
+            <string>PSGroupCell</string>
+            <key>footerText</key>
+            <string>If you have any issues, please contact me via email inside of Cydia.</string>
+        </dict>
 		<dict>
 			<key>cell</key>
 			<string>PSLinkCell</string>
@@ -102,12 +92,6 @@
 			<key>label</key>
 			<string>Credits</string>
 		</dict>
-		        <dict>
-            <key>cell</key>
-            <string>PSGroupCell</string>
-            <key>footerText</key>
-            <string>If you have any issues, please contact me via email inside of Cydia.</string>
-        </dict>
 	</array>
 	<key>title</key>
 	<string>Adiutor</string>
