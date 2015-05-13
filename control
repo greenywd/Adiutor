@@ -1,7 +1,7 @@
 Package: com.greeny.adiutor
 Name: Adiutor
 Depends: mobilesubstrate, firmware (>=8.0)
-Version: 0.0.1
+Version: 1.0
 Architecture: iphoneos-arm
 Description: A much less intrusive Siri
 Maintainer: GreenyDev <greenydev@greenmail.net.au>

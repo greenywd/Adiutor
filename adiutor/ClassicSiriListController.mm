@@ -99,7 +99,7 @@ return cell;
         [footer setNumberOfLines:1];
         footer.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18];
         if(!pirated){
-        [footer setText:@"Thank you for your purchase :)"];
+        [footer setText:@"Thank you for your purchase"];
     } else {
         [footer setText:@":("];
     }

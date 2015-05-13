@@ -38,6 +38,7 @@
 			<key>PostNotification</key>
 			<string>com.greeny.adiutor/prefsChanged</string>
 		</dict>
+		
 				<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
@@ -56,7 +57,7 @@
             <key>cell</key>
             <string>PSGroupCell</string>
             <key>footerText</key>
-            <string>Height</string>
+            <string>Height of Siri - 0.00 is fullscreen</string>
             <key>footerAlignment</key>
             <integer>1</integer>
         </dict>

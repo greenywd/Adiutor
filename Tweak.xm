@@ -1,15 +1,24 @@
 #import <UIKit/UIKit.h>
 #import "UAObfuscatedString.h"
+#import <UIKit/UIApplication.h>
+#import <SpringBoard/SpringBoard.h>
 #include <dlfcn.h>
+
+@interface SBAppWindow : UIWindow
++ (id)sharedInstance;
+@end
 
 bool enabled;
 bool isOverlayEnabled;
 bool isFullScreenView;
 bool fullScreenFirst;
 bool showStatusBar;
+bool showHelpButton;
 bool pirated;
 
 CGFloat heightOfSiri;
+UIButton *changeViewBtn;
+//UIWindow *window;
 
 static void loadPreferences() {
     CFPreferencesAppSynchronize(CFSTR("com.greeny.adiutor"));
@@ -19,7 +28,16 @@ static void loadPreferences() {
     showStatusBar = !CFPreferencesCopyAppValue(CFSTR("showStatusBar"), CFSTR("com.greeny.adiutor")) ? YES : [(id)CFPreferencesCopyAppValue(CFSTR("showStatusBar"), CFSTR("com.greeny.adiutor")) boolValue];
     fullScreenFirst = !CFPreferencesCopyAppValue(CFSTR("fullScreenFirst"), CFSTR("com.greeny.adiutor")) ? NO : [(id)CFPreferencesCopyAppValue(CFSTR("fullScreenFirst"), CFSTR("com.greeny.adiutor")) boolValue];
     heightOfSiri = !CFPreferencesCopyAppValue(CFSTR("heightOfSiri"), CFSTR("com.greeny.adiutor")) ? .5 : [(id)CFPreferencesCopyAppValue(CFSTR("heightOfSiri"), CFSTR("com.greeny.adiutor")) floatValue];
+    showHelpButton = !CFPreferencesCopyAppValue(CFSTR("showHelpButton"), CFSTR("com.greeny.adiutor")) ? YES : [(id)CFPreferencesCopyAppValue(CFSTR("showHelpButton"), CFSTR("com.greeny.adiutor")) boolValue];
 }
+
+%hook AFUISiriView
+-(void)_configureHelpButton{
+    if(showHelpButton){
+        %orig;
+    }
+}
+%end
 
 %hook AFUISiriViewController
 
@@ -31,16 +49,19 @@ static void loadPreferences() {
 
 -(void)siriDidActivateFromSource:(long long)arg1 {
     %orig;
-
-    UIButton *changeViewBtn = [[UIButton buttonWithType: UIButtonTypeContactAdd] retain];
+    
+    changeViewBtn = [[UIButton buttonWithType: UIButtonTypeContactAdd] retain];
 
     if(!pirated && enabled && isOverlayEnabled && !fullScreenFirst){
 		isFullScreenView = NO;
 
+        /*window = [[UIApplication sharedApplication] keyWindow];
+        window.frame = CGRectMake(0, 0, window.frame.size.width, [[UIScreen mainScreen] bounds].size.height - 100);*/
+
         [[self view] setFrame:CGRectMake(0, [self view].bounds.size.height * heightOfSiri, [self view].bounds.size.width, [self view].bounds.size.height * (1 - heightOfSiri))];
 
 	    [changeViewBtn setTintColor:[UIColor whiteColor]];
-        [changeViewBtn setFrame:CGRectMake([self view].bounds.size.width * .9, ([self view].bounds.size.height -33), 22, 22)];
+        [changeViewBtn setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * .85, ([self view].bounds.size.height - 33), 22, 22)];
 
         [changeViewBtn addTarget:self action:@selector(changeViews) forControlEvents:UIControlEventTouchDown];
         
@@ -54,7 +75,7 @@ static void loadPreferences() {
 
             //UIButton *changeViewBtn1 = [UIButton buttonWithType: UIButtonTypeContactAdd];
             [changeViewBtn setTintColor:[UIColor whiteColor]];
-            [changeViewBtn setFrame:CGRectMake([self view].bounds.size.width * .9, ([self view].bounds.size.height -33), 22, 22)];
+            [changeViewBtn setFrame:CGRectMake([self view].bounds.size.width * .85, ([self view].bounds.size.height -33), 22, 22)];
 
             [changeViewBtn addTarget:self action:@selector(changeViews) forControlEvents:UIControlEventTouchDown];
         
@@ -63,12 +84,14 @@ static void loadPreferences() {
     }
 }
 
+#pragma mark - 
 %new(v@:)
 - (void)changeViews{
-    UIButton *changeViewBtn2 = [[UIButton buttonWithType: UIButtonTypeContactAdd] retain];
+
+    //changeViewBtn = [[UIButton buttonWithType: UIButtonTypeContactAdd] retain];
 
 	if(!isFullScreenView){
-	
+
 		[UIView beginAnimations:nil context:nil];
     	[UIView setAnimationDuration:0.5];
     	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
@@ -79,12 +102,12 @@ static void loadPreferences() {
 
 		isFullScreenView = YES;
 
-        [changeViewBtn2 setTintColor:[UIColor whiteColor]];
-        [changeViewBtn2 setFrame:CGRectMake([self view].bounds.size.width * .9, ([self view].bounds.size.height -33), 22, 22)];
+        [changeViewBtn setTintColor:[UIColor whiteColor]];
+        [changeViewBtn setFrame:CGRectMake([self view].bounds.size.width * .85, ([self view].bounds.size.height -33), 22, 22)];
 
-        [changeViewBtn2 addTarget:self action:@selector(changeViews) forControlEvents:UIControlEventTouchDown];
+        [changeViewBtn addTarget:self action:@selector(changeViews) forControlEvents:UIControlEventTouchDown];
         
-        [[self view] addSubview:changeViewBtn2];
+        [[self view] addSubview:changeViewBtn];
 
 	} else {
 
@@ -98,7 +121,7 @@ static void loadPreferences() {
 		
 		isFullScreenView = NO;
 	   
-        [changeViewBtn2 setFrame:CGRectMake([self view].bounds.size.width * .9, ([self view].bounds.size.height -33), 22, 22)];
+        [changeViewBtn setFrame:CGRectMake([self view].bounds.size.width * .85, ([self view].bounds.size.height -33), 22, 22)];
     }
 }
 %end
@@ -116,7 +139,9 @@ static void loadPreferences() {
 
 static void something(){
 	NSString *identifier = Obfuscate.forward_slash.v.a.r.forward_slash.l.i.b.forward_slash.d.p.k.g.forward_slash.i.n.f.o.forward_slash.c.o.m.dot.g.r.e.e.n.y.dot.a.d.i.u.t.o.r.dot.l.i.s.t;
-	if(![[NSFileManager defaultManager] fileExistsAtPath:identifier]){
+    NSString *identifier2 = Obfuscate.forward_slash.v.a.r.forward_slash.l.i.b.forward_slash.d.p.k.g.forward_slash.i.n.f.o.forward_slash.o.r.g.dot.t.h.e.b.i.g.b.o.s.s.dot.a.d.i.u.t.o.r.dot.l.i.s.t;
+
+	if(![[NSFileManager defaultManager] fileExistsAtPath:identifier] && ![[NSFileManager defaultManager] fileExistsAtPath:identifier2]){
 		pirated = YES;
 	}
 }
