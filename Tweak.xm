@@ -4,14 +4,15 @@
 #import <SpringBoard/SpringBoard.h>
 #include <dlfcn.h>
 
-@interface SBAppWindow : UIWindow
-+ (id)sharedInstance;
+@interface AFUISiriViewController : UIViewController
+-(void)endSession;
 @end
 
 bool enabled;
 bool isOverlayEnabled;
 bool isFullScreenView;
 bool fullScreenFirst;
+bool siriIsActivated;
 bool showStatusBar;
 bool showHelpButton;
 bool pirated;
@@ -41,15 +42,11 @@ static void loadPreferences() {
 
 %hook AFUISiriViewController
 
--(void)_addStatusBar {
-    if(showStatusBar){
-        %orig;
-    }
-}
-
 -(void)siriDidActivateFromSource:(long long)arg1 {
     %orig;
     
+    siriIsActivated = YES;
+
     changeViewBtn = [[UIButton buttonWithType: UIButtonTypeContactAdd] retain];
 
     if(!pirated && enabled && isOverlayEnabled && !fullScreenFirst){
@@ -73,7 +70,6 @@ static void loadPreferences() {
 
             [[self view] setFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
 
-            //UIButton *changeViewBtn1 = [UIButton buttonWithType: UIButtonTypeContactAdd];
             [changeViewBtn setTintColor:[UIColor whiteColor]];
             [changeViewBtn setFrame:CGRectMake([self view].bounds.size.width * .85, ([self view].bounds.size.height -33), 22, 22)];
 
@@ -83,12 +79,18 @@ static void loadPreferences() {
         }
     }
 }
+-(CGRect)_statusBarFrame{
+    CGRect r = %orig;
 
-#pragma mark - 
+    if(!showStatusBar){
+    return CGRectMake(r.origin.x + 1000, r.origin.y - 20, r.size.width, r.size.height);
+    } else {
+        return %orig;
+    }
+}
+
 %new(v@:)
 - (void)changeViews{
-
-    //changeViewBtn = [[UIButton buttonWithType: UIButtonTypeContactAdd] retain];
 
 	if(!isFullScreenView){
 

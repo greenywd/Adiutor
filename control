@@ -1,4 +1,4 @@
-Package: com.greeny.adiutor
+Package: org.thebigboss.adiutor
 Name: Adiutor
 Depends: mobilesubstrate, firmware (>=8.0)
 Version: 1.0

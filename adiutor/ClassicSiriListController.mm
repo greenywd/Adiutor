@@ -3,7 +3,7 @@
 bool pirated;
 
 void isPirated(){
-    if([[NSFileManager defaultManager] fileExistsAtPath:@"/var/lib/dpkg/info/com.greeny.adiutor.list"]){
+    if([[NSFileManager defaultManager] fileExistsAtPath:@"/var/lib/dpkg/info/com.greeny.adiutor.list"] && ![[NSFileManager defaultManager] fileExistsAtPath:@"/var/lib/dpkg/info/org.thebigboss.adiutor.list"]){
         pirated = NO;
     }
 }
@@ -110,38 +110,33 @@ return cell;
         easterEggText = [[UILabel alloc] initWithFrame:centeredText];
         [easterEggText setNumberOfLines:1];
         easterEggText.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14];
-        [easterEggText setText:@"Please Don't Scroll Any Higher"];
+        [easterEggText setText:@"Hi there, scroll back down please"];
         [easterEggText setBackgroundColor:[UIColor clearColor]];
-        easterEggText.textColor = [UIColor whiteColor];
+        easterEggText.textColor = [UIColor blackColor];
         easterEggText.textAlignment = NSTextAlignmentCenter;
 
         easterEggText2 = [[UILabel alloc] initWithFrame:centeredText2];
         [easterEggText2 setNumberOfLines:1];
         easterEggText2.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14];
-        [easterEggText2 setText:@"I'm Warning YOU!"];    
+        [easterEggText2 setText:@"Mate, get back down there"];    
         [easterEggText2 setBackgroundColor:[UIColor clearColor]];
-        easterEggText2.textColor = [UIColor whiteColor];
+        easterEggText2.textColor = [UIColor blackColor];
         easterEggText2.textAlignment = NSTextAlignmentCenter;
 
         easterEggText3 = [[UILabel alloc] initWithFrame:centeredText3];
         [easterEggText3 setNumberOfLines:1];
         easterEggText3.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14];
-        if (pirated)
-        {
-            [easterEggText3 setText:@""];
-        } else {
-            [easterEggText3 setText:@"Avada Kadabra!!!!!"];
-        }
+            [easterEggText3 setText:@"Fine, that's all there is up here."];
         [easterEggText3 setBackgroundColor:[UIColor clearColor]];
-        easterEggText3.textColor = [UIColor whiteColor];
+        easterEggText3.textColor = [UIColor blackColor];
         easterEggText3.textAlignment = NSTextAlignmentCenter;
 
         easterEggText4 = [[UILabel alloc] initWithFrame:centeredText4];
         [easterEggText4 setNumberOfLines:3];
         easterEggText4.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14];
-        [easterEggText4 setText:@"Fine, you made it all the way here - I might as well tell you. The Mixtape is still coming!"];
+        [easterEggText4 setText:@"Really, you made it all the way up here? Good job, you just wasted 20 seconds of your life :p"];
         [easterEggText4 setBackgroundColor:[UIColor clearColor]];
-        easterEggText4.textColor = [UIColor whiteColor];
+        easterEggText4.textColor = [UIColor blackColor];
         easterEggText4.textAlignment = NSTextAlignmentCenter;
 
         //[self addSubview:backgroundView];
