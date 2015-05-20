@@ -1,4 +1,4 @@
 # Adiutor
 A somewhat less-intrusive Siri
 
-![Screenshot](http://imgur.com/HkW5sO8)
+![Screenshot](http://i.imgur.com/HkW5sO8.jpg)
