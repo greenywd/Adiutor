@@ -38,8 +38,7 @@
 			<key>PostNotification</key>
 			<string>com.greeny.adiutor/prefsChanged</string>
 		</dict>
-		
-				<dict>
+		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>default</key>

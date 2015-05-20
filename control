@@ -6,4 +6,5 @@ Architecture: iphoneos-arm
 Description: A much less intrusive Siri
 Maintainer: GreenyDev <greenydev@greenmail.net.au>
 Author: GreenyDev <greenydev@greenmail.net.au>
+Depiction: http://greenydev.github.io/repo/adiutor/index.html
 Section: Tweaks

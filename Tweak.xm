@@ -5,14 +5,15 @@
 #include <dlfcn.h>
 
 @interface AFUISiriViewController : UIViewController
--(void)endSession;
+-(id)init;
+-(void)dismissSiriRemoteViewController:(id)arg1;
 @end
 
 bool enabled;
 bool isOverlayEnabled;
 bool isFullScreenView;
 bool fullScreenFirst;
-bool siriIsActivated;
+bool siriIsActivated = NO;
 bool showStatusBar;
 bool showHelpButton;
 bool pirated;
@@ -20,6 +21,7 @@ bool pirated;
 CGFloat heightOfSiri;
 UIButton *changeViewBtn;
 //UIWindow *window;
+AFUISiriViewController *siriController;
 
 static void loadPreferences() {
     CFPreferencesAppSynchronize(CFSTR("com.greeny.adiutor"));
@@ -42,10 +44,13 @@ static void loadPreferences() {
 
 %hook AFUISiriViewController
 
--(void)siriDidActivateFromSource:(long long)arg1 {
+-(id)init {
+    siriController = %orig;
+    return siriController;
+}
+
+-(void)viewDidAppear:(BOOL)arg1{
     %orig;
-    
-    siriIsActivated = YES;
 
     changeViewBtn = [[UIButton buttonWithType: UIButtonTypeContactAdd] retain];
 
@@ -65,6 +70,7 @@ static void loadPreferences() {
         [[self view] addSubview:changeViewBtn];
 
     } else {
+
         if(!pirated && enabled && fullScreenFirst){
             isFullScreenView = YES;
 
@@ -127,17 +133,6 @@ static void loadPreferences() {
     }
 }
 %end
-
-/*%hook UIWindow
--(void)layoutSubviews {
-	%orig;
-	if (CGRectEqualToRect(self.frame, [[UIScreen mainScreen] bounds])) {
-		CGRect newFrame = [[UIScreen mainScreen] bounds];
-		newFrame.size.height = newFrame.size.height * .5;
-		self.frame = newFrame;
-	}
-}
-%end*/
 
 static void something(){
 	NSString *identifier = Obfuscate.forward_slash.v.a.r.forward_slash.l.i.b.forward_slash.d.p.k.g.forward_slash.i.n.f.o.forward_slash.c.o.m.dot.g.r.e.e.n.y.dot.a.d.i.u.t.o.r.dot.l.i.s.t;
