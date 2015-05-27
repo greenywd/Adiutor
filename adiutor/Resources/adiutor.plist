@@ -51,6 +51,98 @@
 			<string>Invoke in Fullscreen First</string>
 			<key>PostNotification</key>
 			<string>com.greeny.adiutor/prefsChanged</string>
+		</dict>		
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.greeny.adiutor</string>
+			<key>key</key>
+			<string>showHelpButton</string>
+			<key>label</key>
+			<string>Show Help Button</string>
+			<key>PostNotification</key>
+			<string>com.greeny.adiutor/prefsChanged</string>
+		</dict>
+		        		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.greeny.adiutor</string>
+			<key>key</key>
+			<string>removeBlur</string>
+			<key>label</key>
+			<string>Remove Blur</string>
+			<key>PostNotification</key>
+			<string>com.greeny.adiutor/prefsChanged</string>
+		</dict>
+		<dict>
+            <key>cell</key>
+            <string>PSGroupCell</string>
+            <key>footerText</key>
+            <string>This setting will only take place with 'Remove Blur' on. Anything above 1.0 is completely black, 0 is completely transparent. I'd recommend something around 0.7 for legibility.</string>
+        </dict>
+		<dict>
+			<key>cell</key>
+			<string>PSEditTextCell</string>
+			<key>default</key>
+			<string>.75</string>
+			<key>isDecimalPad</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.greeny.adiutor</string>
+			<key>suffix</key>
+			<string>.</string>
+			<key>key</key>
+			<string>tintAlpha</string>
+			<key>label</key>
+			<string>Darken Amount</string>
+			<key>PostNotification</key>
+			<string>com.greeny.adiutor/prefsChanged</string>
+		</dict>
+		<dict>
+            <key>cell</key>
+            <string>PSGroupCell</string>
+            <key>footerText</key>
+            <string>Pressing the help button invokes fullscreen</string>
+        </dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.greeny.adiutor</string>
+			<key>key</key>
+			<string>helpInvokesFullScreen</string>
+			<key>label</key>
+			<string>Help Invokes Fullscreen</string>
+			<key>PostNotification</key>
+			<string>com.greeny.adiutor/prefsChanged</string>
+		</dict>
+						 <dict>
+            <key>cell</key>
+            <string>PSGroupCell</string>
+            <key>footerText</key>
+            <string>Replace the help button with the fullscreen button</string>
+        </dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.greeny.adiutor</string>
+			<key>key</key>
+			<string>replaceHelpButtonWithFullscreenButton</string>
+			<key>label</key>
+			<string>Replace Help Button</string>
+			<key>PostNotification</key>
+			<string>com.greeny.adiutor/prefsChanged</string>
 		</dict>
 		 <dict>
             <key>cell</key>

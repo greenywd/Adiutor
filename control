@@ -1,10 +1,11 @@
 Package: org.thebigboss.adiutor
 Name: Adiutor
-Depends: mobilesubstrate, firmware (>=8.0)
-Version: 1.0
+Depends: mobilesubstrate, firmware (>=7.0)
+Version: 1.1
 Architecture: iphoneos-arm
 Description: A much less intrusive Siri
 Maintainer: GreenyDev <greenydev@greenmail.net.au>
 Author: GreenyDev <greenydev@greenmail.net.au>
 Depiction: http://greenydev.github.io/repo/adiutor/index.html
+Tag: cydia::commercial
 Section: Tweaks
