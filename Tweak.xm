@@ -19,6 +19,10 @@ UIImage *plusButtonImg;
 UIImage *minusButtonImg;
 SiriUIHelpButton *siriHelpButton;
 AFUISiriViewController *siriController;
+<<<<<<< HEAD
+=======
+SiriUISiriStatusView *siriStatusView;
+>>>>>>> b9ce757faa903521af54eb2dc4cac4d70359c696
 //UIWindow *window;
 
 static void loadPreferences() {
@@ -39,6 +43,13 @@ static void loadPreferences() {
 %hook AFUISiriView
 -(void)_configureHelpButton{
     if(!pirated && !showHelpButton){
+<<<<<<< HEAD
+        %orig;
+        siriHelpButton = MSHookIvar<SiriUIHelpButton*>(self, "_helpButton");
+        [siriHelpButton removeFromSuperview];
+    } else {
+=======
+>>>>>>> b9ce757faa903521af54eb2dc4cac4d70359c696
         %orig;
         siriHelpButton = MSHookIvar<SiriUIHelpButton*>(self, "_helpButton");
         [siriHelpButton removeFromSuperview];
@@ -46,6 +57,16 @@ static void loadPreferences() {
         %orig;
     }
 }
+-(id)dimBackdropSettings {
+    if(removeBlur){
+    _UIBackdropViewSettings *siriBlurSettings = [_UIBackdropViewSettings settingsForStyle:2030 graphicsQuality:10];
+    [siriBlurSettings setGrayscaleTintAlpha:tintAlpha];
+    return siriBlurSettings;
+    } else {
+        return %orig;
+    }
+}
+<<<<<<< HEAD
 -(id)dimBackdropSettings {
     if(removeBlur){
     _UIBackdropViewSettings *siriBlurSettings = [_UIBackdropViewSettings settingsForStyle:2030 graphicsQuality:10];
@@ -80,6 +101,44 @@ static void loadPreferences() {
         return %orig;
     }
 }
+=======
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    if (point.x > self.frame.size.width + self.frame.origin.x || point.x < self.frame.origin.x  || point.y > self.frame.size.height + self.frame.origin.y - siriStatusView.frame.size.height || point.y < self.frame.origin.y) {
+        //outside, do something
+        HBLogInfo(@"AFUISiriView MEMES!!!!");
+    }
+    return %orig;
+}
+%end
+
+%hook SiriUISiriStatusView
+-(id)init {
+    siriStatusView = %orig;
+    return siriStatusView;
+}
+-(void)dealloc {
+    siriStatusView = nil;
+}
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    if (point.x > self.frame.size.width + self.frame.origin.x || point.x < self.frame.origin.x  || point.y > self.frame.size.height + self.frame.origin.y || point.y < self.frame.origin.y) {
+        //outside, do something
+        HBLogInfo(@"SiriUISiriStatusView MEMES!!!!");
+    }
+    return %orig;
+}
+%end
+
+%hook AFUISiriViewController
+-(CGRect)_statusBarFrame{
+    CGRect r = %orig;
+
+    if(!showStatusBar && !pirated){
+    return CGRectMake(r.origin.x + 1000, r.origin.y - 20, r.size.width, r.size.height);
+    } else {
+        return %orig;
+    }
+}
+>>>>>>> b9ce757faa903521af54eb2dc4cac4d70359c696
 //pls
 -(void)viewDidAppear:(BOOL)arg1{
     %orig;
