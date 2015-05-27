@@ -19,10 +19,10 @@ UIImage *plusButtonImg;
 UIImage *minusButtonImg;
 SiriUIHelpButton *siriHelpButton;
 AFUISiriViewController *siriController;
-<<<<<<< HEAD
+<<<<<<< ours
 =======
 SiriUISiriStatusView *siriStatusView;
->>>>>>> b9ce757faa903521af54eb2dc4cac4d70359c696
+>>>>>>> theirs
 //UIWindow *window;
 
 static void loadPreferences() {
@@ -43,13 +43,13 @@ static void loadPreferences() {
 %hook AFUISiriView
 -(void)_configureHelpButton{
     if(!pirated && !showHelpButton){
-<<<<<<< HEAD
+<<<<<<< ours
         %orig;
         siriHelpButton = MSHookIvar<SiriUIHelpButton*>(self, "_helpButton");
         [siriHelpButton removeFromSuperview];
     } else {
 =======
->>>>>>> b9ce757faa903521af54eb2dc4cac4d70359c696
+>>>>>>> theirs
         %orig;
         siriHelpButton = MSHookIvar<SiriUIHelpButton*>(self, "_helpButton");
         [siriHelpButton removeFromSuperview];
@@ -66,7 +66,7 @@ static void loadPreferences() {
         return %orig;
     }
 }
-<<<<<<< HEAD
+<<<<<<< ours
 -(id)dimBackdropSettings {
     if(removeBlur){
     _UIBackdropViewSettings *siriBlurSettings = [_UIBackdropViewSettings settingsForStyle:2030 graphicsQuality:10];
@@ -138,7 +138,7 @@ static void loadPreferences() {
         return %orig;
     }
 }
->>>>>>> b9ce757faa903521af54eb2dc4cac4d70359c696
+>>>>>>> theirs
 //pls
 -(void)viewDidAppear:(BOOL)arg1{
     %orig;
