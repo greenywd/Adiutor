@@ -19,10 +19,8 @@ UIImage *plusButtonImg;
 UIImage *minusButtonImg;
 SiriUIHelpButton *siriHelpButton;
 AFUISiriViewController *siriController;
-<<<<<<< ours
-=======
 SiriUISiriStatusView *siriStatusView;
->>>>>>> theirs
+UIPinchGestureRecognizer *pinchGestureRecnognizer;
 //UIWindow *window;
 
 static void loadPreferences() {
@@ -42,66 +40,21 @@ static void loadPreferences() {
 
 %hook AFUISiriView
 -(void)_configureHelpButton{
-    if(!pirated && !showHelpButton){
-<<<<<<< ours
-        %orig;
-        siriHelpButton = MSHookIvar<SiriUIHelpButton*>(self, "_helpButton");
-        [siriHelpButton removeFromSuperview];
-    } else {
-=======
->>>>>>> theirs
-        %orig;
-        siriHelpButton = MSHookIvar<SiriUIHelpButton*>(self, "_helpButton");
-        [siriHelpButton removeFromSuperview];
-    } else {
-        %orig;
-    }
-}
--(id)dimBackdropSettings {
-    if(removeBlur){
-    _UIBackdropViewSettings *siriBlurSettings = [_UIBackdropViewSettings settingsForStyle:2030 graphicsQuality:10];
-    [siriBlurSettings setGrayscaleTintAlpha:tintAlpha];
-    return siriBlurSettings;
-    } else {
-        return %orig;
-    }
-}
-<<<<<<< ours
--(id)dimBackdropSettings {
-    if(removeBlur){
-    _UIBackdropViewSettings *siriBlurSettings = [_UIBackdropViewSettings settingsForStyle:2030 graphicsQuality:10];
-    [siriBlurSettings setGrayscaleTintAlpha:tintAlpha];
-    return siriBlurSettings;
-    } else {
-        return %orig;
-    }
-}
--(void)loadView{
     %orig;
-    backgroundHitButton = [[UIButton buttonWithType: UIButtonTypeCustom] retain];
-    [backgroundHitButton addTarget:self action:@selector(dismissSiri) forControlEvents:UIControlEventTouchDown];
-    [backgroundHitButton setTitle:@"" forState:UIControlStateNormal];
-    [backgroundHitButton setFrame:CGRectMake(0,0,[UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
-    [[self view] addSubview:backgroundHitButton];
+    if(!pirated && !showHelpButton){
+        siriHelpButton = MSHookIvar<SiriUIHelpButton*>(self, "_helpButton");
+        [siriHelpButton removeFromSuperview];
+    }
 }
-%new(v@:)
-- (void)dismissSiri{
-    NSLog(@"BATMAN DISMISS");
-    //[siriController siriDidDeactivate];
-}
-%end
-
-%hook AFUISiriViewController
--(CGRect)_statusBarFrame{
-    CGRect r = %orig;
-
-    if(!showStatusBar && !pirated){
-    return CGRectMake(r.origin.x + 1000, r.origin.y - 20, r.size.width, r.size.height);
+-(id)dimBackdropSettings {
+    if(removeBlur){
+    _UIBackdropViewSettings *siriBlurSettings = [_UIBackdropViewSettings settingsForStyle:2030 graphicsQuality:10];
+    [siriBlurSettings setGrayscaleTintAlpha:tintAlpha];
+    return siriBlurSettings;
     } else {
         return %orig;
     }
 }
-=======
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
     if (point.x > self.frame.size.width + self.frame.origin.x || point.x < self.frame.origin.x  || point.y > self.frame.size.height + self.frame.origin.y - siriStatusView.frame.size.height || point.y < self.frame.origin.y) {
         //outside, do something
@@ -138,14 +91,14 @@ static void loadPreferences() {
         return %orig;
     }
 }
->>>>>>> theirs
-//pls
+
 -(void)viewDidAppear:(BOOL)arg1{
     %orig;
 
     plusButtonImg = [[UIImage imageNamed:PLUS_BUTTON_IMAGE] retain];
     minusButtonImg = [[UIImage imageNamed:MINUS_BUTTON_IMAGE] retain];
     changeViewBtn = [[UIButton buttonWithType: UIButtonTypeCustom] retain];
+    pinchGestureRecnognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchGesture:)];
 
     if(!pirated && enabled && isOverlayEnabled && !fullScreenFirst){
 		isFullScreenView = NO;
@@ -176,9 +129,10 @@ static void loadPreferences() {
 
             [changeViewBtn addTarget:self action:@selector(changeViews) forControlEvents:UIControlEventTouchDown];
         
-            [[self view] addSubview:changeViewBtn];
+            [[self view] insertSubview:changeViewBtn atIndex:5];
         }
     }
+    [[self view] addGestureRecognizer:pinchGestureRecnognizer];
 }
 -(void)siriViewDidReceiveHelpAction:(id)arg1{
     if(!pirated && enabled && helpInvokesFullScreen && !replaceHelpButtonWithFullscreenButton){
@@ -219,7 +173,7 @@ static void loadPreferences() {
     }
 }
 
-%new(v@:)
+%new
 - (void)changeViews{
 
 	if(!isFullScreenView){
@@ -258,6 +212,11 @@ static void loadPreferences() {
 	   
         [changeViewBtn setFrame:CGRectMake([self view].bounds.size.width * .85, ([self view].bounds.size.height -33), 22, 22)];
     }
+}
+%new
+-(void)pinchGesture:(UIPinchGestureRecognizer *)gesture{
+    HBLogInfo(@"LOTS OF MEMES");
+    [[self view] removeFromSuperview];
 }
 %end
 
