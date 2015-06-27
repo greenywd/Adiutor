@@ -1,6 +1,7 @@
 #import "PrefHeaders.h"
 
 bool pirated;
+UILongPressGestureRecognizer *longPressGestureRecnognizer;
 
 void isPirated(){
     if([[NSFileManager defaultManager] fileExistsAtPath:@"/var/lib/dpkg/info/com.greeny.adiutor.list"] && ![[NSFileManager defaultManager] fileExistsAtPath:@"/var/lib/dpkg/info/org.thebigboss.adiutor.list"]){
@@ -87,6 +88,10 @@ return cell;
         UIView *view = [[UIView alloc] initWithFrame:frame];
         view.backgroundColor = kTintColor;
 
+        longPressGestureRecnognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressAction:)];
+        longPressGestureRecnognizer.minimumPressDuration = 1;
+        [view addGestureRecognizer:longPressGestureRecnognizer];
+
         header = [[UILabel alloc] initWithFrame:randFrame];
         [header setNumberOfLines:1];
         header.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:36];
@@ -154,6 +159,12 @@ return cell;
  
 - (CGFloat)preferredHeightForWidth:(CGFloat)arg1 {
     return 150.f;
+}
+-(void)longPressAction:(UILongPressGestureRecognizer*) gesture{
+    if (gesture.state == UIGestureRecognizerStateBegan){
+    //UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Title" message:@"Message" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        //[alert show];
+    }
 }
 @end
 
