@@ -27,6 +27,7 @@ static void loadPreferences() {
     helpInvokesFullScreen = !CFPreferencesCopyAppValue(CFSTR("helpInvokesFullScreen"), CFSTR("com.greeny.adiutor")) ? YES : [(id)CFPreferencesCopyAppValue(CFSTR("helpInvokesFullScreen"), CFSTR("com.greeny.adiutor")) boolValue];
     replaceHelpButtonWithFullscreenButton = !CFPreferencesCopyAppValue(CFSTR("replaceHelpButtonWithFullscreenButton"), CFSTR("com.greeny.adiutor")) ? YES : [(id)CFPreferencesCopyAppValue(CFSTR("replaceHelpButtonWithFullscreenButton"), CFSTR("com.greeny.adiutor")) boolValue];
     removeBlur = !CFPreferencesCopyAppValue(CFSTR("removeBlur"), CFSTR("com.greeny.adiutor")) ? NO : [(id)CFPreferencesCopyAppValue(CFSTR("removeBlur"), CFSTR("com.greeny.adiutor")) boolValue];
+    oldVoice = !CFPreferencesCopyAppValue(CFSTR("oldVoice"), CFSTR("com.greeny.adiutor")) ? NO : [(id)CFPreferencesCopyAppValue(CFSTR("oldVoice"), CFSTR("com.greeny.adiutor")) boolValue];
 }
 //create a sharedinstance so we can call methods from this class later on
 %hook SBIconContentView
@@ -53,6 +54,13 @@ static void loadPreferences() {
     } else {
     	[self setFrame:oldCenter];
     }
+}
+%end
+
+//code for old Siri voice used back in iOS 5/6 (class used for this only exists in iOS 9, there's a class in iOS 8 and lower that has this same method, but I'm too lazy to look for it)
+%hook VSSpeechRequest
+-(void) setUseCustomVoice:(BOOL)arg1 {
+	%orig(NO);
 }
 %end
 
