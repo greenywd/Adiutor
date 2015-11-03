@@ -62,6 +62,7 @@ static void loadPreferences() {
 //code for old Siri voice used back in iOS 5/6 (class used for this only exists in iOS 9, there's a class in iOS 8 and lower that has this same method, but I'm too lazy to look for it)
 %hook VSSpeechRequest
 -(void) setUseCustomVoice:(BOOL)arg1 {
+	if(!pirated && oldVoice)
 	%orig(NO);
 }
 %end
