@@ -10,6 +10,8 @@ bool helpInvokesFullScreen;
 bool pirated;
 bool replaceHelpButtonWithFullscreenButton;
 bool removeBlur;
+bool oldVoice;
+
 //yes, this actually toggles classic mode - albeit very, very unfinished.
 bool useClassicMode = NO;
 
